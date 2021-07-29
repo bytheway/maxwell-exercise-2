@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bigdecimal (3.0.2)
+
+PLATFORMS
+  x86_64-darwin-20
+
+DEPENDENCIES
+  bigdecimal
+
+BUNDLED WITH
+   2.2.24

@@ -1,11 +1,14 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'bigdecimal'
 
 class Item 
   attr_accessor :name, :unit_price, :sale_price, :sale_qty
 
   def initialize(name:, unit_price:, sale_price: nil, sale_qty: nil)
     @name = name
-    @unit_price = unit_price
-    @sale_price = sale_price
+    @unit_price = BigDecimal(unit_price) unless unit_price.nil?
+    @sale_price = BigDecimal(sale_price) unless sale_price.nil?
     @sale_qty = sale_qty
   end
 
@@ -59,15 +62,15 @@ class Cart
             print qty
             print " " * (14 - qty.to_s.length)
 
-            print "$#{price}"
+            print "$#{price.to_s("2F")}"
             puts
         end
 
         puts
-        puts "Total price : $#{total_price}"
+        puts "Total price : $#{total_price.to_s("2F")}"
 
         if total_price < total_retail_price
-            puts "You saved $#{total_retail_price - total_price} today."
+            puts "You saved $#{(total_retail_price - total_price).to_s("2F")} today."
         end
 
         puts
@@ -75,10 +78,10 @@ class Cart
 end
 
 items = {}
-items['milk'] = Item.new(name: 'Milk', unit_price: 3.97, sale_price: 5, sale_qty: 2 )
-items['bread'] =  Item.new(name: 'Bread', unit_price: 2.17, sale_price: 6, sale_qty: 3 )
-items['banana'] =Item.new(name: 'Banana', unit_price: 0.99)
-items['apple'] = Item.new(name: 'Apple', unit_price: 0.89)
+items['milk'] = Item.new(name: 'Milk', unit_price: "3.97", sale_price: "5.00", sale_qty: 2 )
+items['bread'] =  Item.new(name: 'Bread', unit_price: "2.17", sale_price: "6.00", sale_qty: 3 )
+items['banana'] =Item.new(name: 'Banana', unit_price: "0.99")
+items['apple'] = Item.new(name: 'Apple', unit_price: "0.89")
 
 puts "Please enter all the items purchased separated by a comma"
 
