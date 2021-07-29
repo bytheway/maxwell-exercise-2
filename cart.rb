@@ -9,6 +9,9 @@ class Cart
     # Adds an item to the cart. Each additional addition increases the qty of that 
     # item in the cart.
     def add_item(name)
+        # guard against unknown products
+        return unless price_list[name]
+
         @cart_items[name] ||= 0
         @cart_items[name] += 1
     end
