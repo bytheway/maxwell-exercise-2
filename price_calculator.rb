@@ -15,7 +15,7 @@ puts "Please enter all the items purchased separated by a comma"
 
 input = gets.chomp
 
-input = input.split(",").map{|i| i.strip}
+input = input.split(",").map{|i| i.strip.downcase}
 
 cart = Cart.new(price_list)
 
